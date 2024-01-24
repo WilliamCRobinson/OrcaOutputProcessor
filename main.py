@@ -3,11 +3,23 @@ from SinglePointEnergyParser import SinglePointEnergyParser
 from GTensorParser import GTensorParser
 import os
 """
-The purpose of this package is to provide a user-friendly 
+The purpose of this package is to provide a user-friendly interface for parsing Orca-formatted output files.
 """
 
 
 def main():
+    """
+    Main function to process Orca-formatted output files based on user input.
+
+    Uses all of the other modules. The intention is that if you are interested in another peice of data,
+    write a module and then add another branch in the if statement.
+
+    Prompts the user for a spec for hyperfine data, g-tensor data, or single-point energy data.
+    Asks for the absolute path of the output file directory and performs the chosen processing on the files.
+
+    Returns:
+        None
+    """
     process_requested = input("hyperfine, g-tensor, or singlepoint:")
     output_path = input("please provide the absolute path of your output file directory:")
     if process_requested.lower() == "hyperfine":

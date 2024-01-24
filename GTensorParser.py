@@ -9,7 +9,32 @@ import datetime
 
 
 class GTensorParser:
+    """
+    This module operates on a directory of Orca-formatted output files and parses the output files for g-tensor values.
 
+    Attributes:
+        directory_of_outputs (str): The path to the directory containing Orca-formatted output files.
+        calc_names (list): A list to store the names of calculations.
+        g_tensor_values (list): A list to store the g-tensor values.
+
+    Methods:
+        __init__(directory_of_outputs):
+            Initializes the GTensorParser with the specified directory of output files.
+
+        iterate_over_outputs_parse_output_g_tensor():
+            Parses each output file in the directory for g-tensor values and saves the results to class variables.
+            Generates a timestamped CSV file with the g-tensor values.
+
+    Usage example:
+    ```
+    parser = GTensorParser("output_directory")
+    parser.iterate_over_outputs_parse_output_g_tensor()
+    ```
+
+    Note:
+    - The timestamped CSV file is named "g-Tensor_values_<timestamp>.csv".
+    - The CSV file includes headers: "Calc Names" and "g(tot)_iso value".
+    """
     def __init__(self, directory_of_outputs):
         self.directory_of_outputs = directory_of_outputs
         self.calc_names = []
@@ -17,7 +42,7 @@ class GTensorParser:
 
     def iterate_over_outputs_parse_output_g_tensor(self):
         """
-        parses an output file for g-tensor, report as g(tot)_iso
+        Parses an output file for g-tensor, reports as g(tot)_iso.
         -------------------
         ELECTRONIC G-MATRIX
         -------------------
@@ -25,7 +50,12 @@ class GTensorParser:
         .
         .
          g(tot)       1.9329532    2.0181608    2.0752548 iso=  2.0087896
-        :return: null, data is saved to class variables.
+
+        Raises:
+            Exception: If an error occurs during the parsing process.
+
+        Returns:
+            None
         """
         try:
             os.chdir(self.directory_of_outputs)

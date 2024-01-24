@@ -7,31 +7,43 @@ Project overview
 The purpose of this python package of modules is to parse output  files and return relevant properties to a csv file
 for data compilation purposes very useful for large scale project.
 
+Modules
+1. HyperFineMagneticParser
 
+    Parses Orca-formatted output files for hyperfine and magnetic properties.
+    Saves the relevant data, such as A(iso) values and atom IDs, in a CSV file.
+
+2. GTensorParser
+
+    Operates on a directory of Orca-formatted output files.
+    Parses the output files for g-tensor values and generates a timestamped CSV file with the results.
+
+3. SinglePointEnergyParser
+
+    Operates on a directory of Orca-formatted output files.
+    Parses the output files for the final single point energy values and generates a timestamped CSV file with the results.
+
+Dependencies
+
+os module for manipulating directories
+csv module for writing and reading csv
+datetime module for writing timestamps to differentiate output files.
 
 Handy resources:
 https://education.molssi.org/python_scripting_cms/02-file_parsing/index.html
 
-Project Structure
+# Orca Output Parser
 
+The Orca Output Parser is a package designed to provide a user-friendly interface for parsing Orca-formatted output files. It includes modules to extract hyperfine coupling constants, g-tensor values, and single-point energy data from a directory of Orca output files.
 
-1.    (hyperfine_parser.py)
-        Responsibility: defines a set of methods to be used by a driver method to return a data array of the hyperfine
-                        coupling constant and gtensor from an Orca output file, name of output file should be included
-                        for traceability.This traceability should make it easy to trace back to the input file and make
-                        insights easily.
-        Class Variable(s) :
-            output_file : the output file that will be read and manipulated. Specified by absolute path.
-        Methods:
-            find_hfc_gtensor_values(self):
+## Usage
 
-            data_to_csv(self, data_values):
+1. Clone the repository:
 
-2.      g-tensor_parser.py
+```bash
+git clone <repository_url>
+cd orca-output-parser
 
-
-
-Usage:
 
 1. Start program with your output directory ready to rock and roll.
 2. enter what type of output data you want to parse for
@@ -41,3 +53,17 @@ Usage:
 
 Weirdness:
 If you run this in sequence it generates entries for the other data.csv files.
+
+Contributing
+
+If you'd like to contribute to the development of the Orca Output Parser, please follow these steps:
+
+    Fork the repository.
+    Create a new branch for your feature: git checkout -b feature-name
+    Commit your changes: git commit -m 'Add some feature'
+    Push to the branch: git push origin feature-name
+    Submit a pull request.
+
+ License
+
+ I dont know just be cool. Use it, add to it, and keep it open source.

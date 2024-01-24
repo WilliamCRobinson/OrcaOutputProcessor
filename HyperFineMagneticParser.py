@@ -1,25 +1,50 @@
 import csv
 
 
-"""
-The purpose of this module is to parse an orca formatted output file and save the relevant hyperfine and magnetic 
-properties.  
-
-OS for manipulating file structures and finding files
-Pandas for data handling
-CSV for data saving.
-"""
-
-
 class HyperFineMagneticParser:
+    """
+    The purpose of this module is to parse an Orca-formatted output file and save the relevant hyperfine and magnetic
+    properties.
+
+    Dependencies:
+        - OS for manipulating file structures and finding files
+        - Pandas for data handling
+        - CSV for data saving.
+
+    Attributes:
+        output_file (str): The path to the Orca-formatted output file.
+
+    Methods:
+        __init__(output_file):
+            Initializes the HyperFineMagneticParser with the specified output file.
+
+        find_write_hfc_values():
+            Finds and writes the A(iso) value and the atom ID for a given output file.
+            Generates a CSV file for the corresponding output.
+
+    Usage example:
+    ```
+    parser = HyperFineMagneticParser("example_output.orca")
+    parser.find_write_hfc_values()
+    ```
+
+    Note:
+    - The output CSV file is named after the input file with a ".csv" extension.
+    - The CSV file includes headers: "Atom ID" and "A(iso) value".
+    """
     def __init__(self, output_file):
         self.output_file = output_file
 
     def find_write_hfc_values(self):
         """
         Finds and writes the A(iso) value and the atom ID for a given output file.
-        will generate a csv file for the corresponding output.
-        :return: null, file is output.
+        Generates a CSV file for the corresponding output.
+
+        Raises:
+            Exception: If an error occurs during the parsing process.
+
+        Returns:
+            None
         """
         try:
             # this is the bulk of the work to be done
@@ -45,11 +70,11 @@ class HyperFineMagneticParser:
 
                 for line in whole_file_data:
                     # check to see if we are entering the right section
-                    print(line.strip())
+                    # print(line.strip())
                     if line.strip() == line_to_search_for:
                         in_target_block = True
                     # if we are in the right section get some shit done.
-                    print(f"in_target_block:{in_target_block}")
+                    # print(f"in_target_block:{in_target_block}")
                     if in_target_block:
                         # Handle the two mutually exclusive cases.
                         print(line)
