@@ -29,3 +29,15 @@ Project Structure
 
 2.      g-tensor_parser.py
 
+
+
+Usage:
+
+1. Start program with your output directory ready to rock and roll.
+2. enter what type of output data you want to parse for
+3. Kickback for like 2 ms
+4. Get your data and perform further analysis.
+5. Be happy you got data.
+
+Weirdness:
+If you run this in sequence it generates entries for the other data.csv files.
