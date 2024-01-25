@@ -46,7 +46,7 @@ cd orca-output-parser
 
 
 1. Start program with your output directory ready to rock and roll.
-2. enter what type of output data you want to parse for
+2. enter what type of output data you want to parse for, or type 'all' to try to get all the data out at once.
 3. Kickback for like 2 ms
 4. Get your data and perform further analysis.
 5. Be happy you got data.

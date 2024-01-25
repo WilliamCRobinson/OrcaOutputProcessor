@@ -62,14 +62,15 @@ class GTensorParser:
             cwd = os.getcwd()
             cwd_list = os.listdir(cwd)
             for outputfile in cwd_list:
-                try:
-                    with open(outputfile, 'r') as file:
-                        self.calc_names.append(str(outputfile.split('.')[0]))
-                        for line in file.readlines():
-                            if line.lower().strip().startswith("g(tot)"):
-                                self.g_tensor_values.append(line.split()[-1])
-                except Exception as e:
-                    print(f"Error while parsing g-tensor values:{e}")
+                if outputfile.endswith('.out'):
+                    try:
+                        with open(outputfile, 'r') as file:
+                            self.calc_names.append(str(outputfile.split('.')[0]))
+                            for line in file.readlines():
+                                if line.lower().strip().startswith("g(tot)"):
+                                    self.g_tensor_values.append(line.split()[-1])
+                    except Exception as e:
+                        print(f"Error while parsing g-tensor values:{e}")
         except Exception as e:
             print(f"Error while iterating over directory: {e}")
         # okay now that the data is saved into two arrays we ought to zip it up and send it to a timestamped output
