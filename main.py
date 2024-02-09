@@ -1,6 +1,7 @@
 import HyperFineMagneticParser
 from SinglePointEnergyParser import SinglePointEnergyParser
 from GTensorParser import GTensorParser
+import OrbitalEnergyParser
 import os
 """
 The purpose of this package is to provide a user-friendly interface for parsing Orca-formatted output files.
@@ -20,7 +21,7 @@ def main():
     Returns:
         None
     """
-    process_requested = input("hyperfine, g-tensor, or singlepoint:")
+    process_requested = input("hyperfine, g-tensor, orbital energies or singlepoint:")
     output_path = input("please provide the absolute path of your output file directory:")
     if process_requested.lower() == "hyperfine":
         # keeping this simple for now, just the stuff that pulls the hyperfine coupling constants out.
@@ -57,6 +58,9 @@ def main():
         os.chdir(output_path)
         spep = SinglePointEnergyParser(output_path)
         spep.iterate_over_outputs_parse_output_spe()
-
+    elif process_requested.lower().strip() == "orbitalenergies" or "orbital" or "orbitalenergy":
+        os.chdir(output_path)
+        oep = OrbitalEnergyParser.OrbitalEnergyParser(output_path)
+        oep.iterate_over_outputs()
 if __name__ == "__main__":
     main()

@@ -28,7 +28,7 @@ class HyperFineMagneticParser:
     parser.find_write_hfc_values()
     ```
 
-    Note:
+    Notes:
     - The output CSV file is named after the input file with a ".csv" extension.
     - The CSV file includes headers: "Atom ID" and "A(iso) value".
     """
@@ -59,7 +59,7 @@ class HyperFineMagneticParser:
                 # read the whole file into the data variable
                 whole_file_data = file_to_read_data_from.readlines()
 
-                # for a given output there should be only one of these files.
+                # for a given output there should be only one of these lines.
                 line_to_search_for = "ELECTRIC AND MAGNETIC HYPERFINE STRUCTURE"
 
                 # iterate through data and  search for line.
@@ -77,7 +77,7 @@ class HyperFineMagneticParser:
                     # print(f"in_target_block:{in_target_block}")
                     if in_target_block:
                         # Handle the two mutually exclusive cases.
-                        print(line)
+                        # print(line)
                         if line.strip().startswith("Nucleus"):
                             split_line = line.split()
                             atom_id = split_line[1]

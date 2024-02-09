@@ -27,7 +27,7 @@ class SinglePointEnergyParser:
     parser.iterate_over_outputs_parse_output_spe()
     ```
 
-    Note:
+    Notes:
     - The timestamped CSV file is named "Single_Point_Energies_<timestamp>.csv".
     - The CSV file includes headers: "Calculation Name" and "Single Point Energy value".
     """
@@ -38,7 +38,7 @@ class SinglePointEnergyParser:
 
     def iterate_over_outputs_parse_output_spe(self):
         """
-        Parses an output file for the line
+        Parses an output file for last instance of the line
         -------------------------   --------------------
         FINAL SINGLE POINT ENERGY     -yyyy.xxxxxxxxxxx
         -------------------------   --------------------

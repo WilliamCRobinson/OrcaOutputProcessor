@@ -31,7 +31,7 @@ class GTensorParser:
     parser.iterate_over_outputs_parse_output_g_tensor()
     ```
 
-    Note:
+    Notes:
     - The timestamped CSV file is named "g-Tensor_values_<timestamp>.csv".
     - The CSV file includes headers: "Calc Names" and "g(tot)_iso value".
     """
