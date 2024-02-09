@@ -64,6 +64,4 @@ If you'd like to contribute to the development of the Orca Output Parser, please
     Push to the branch: git push origin feature-name
     Submit a pull request.
 
- License
 
- I dont know just be cool. Use it, add to it, and keep it open source.
