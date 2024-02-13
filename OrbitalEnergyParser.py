@@ -69,7 +69,10 @@ class OrbitalEnergyParser:
 
         :return:
         """
+        # initialize a list to read in initial file chunk
         eof_to_orbital_energy_list = []
+        # initialize a list to write to output
+        list_to_write_to_output = []
         try:
             os.chdir(self.directory_of_outputs)
             cwd = os.getcwd()
@@ -82,6 +85,7 @@ class OrbitalEnergyParser:
                             # read the whole file into the data variable
                             whole_file_data = file_to_read_data_from.readlines()
                             whole_file_data.reverse()
+                            # append lines backwards until you hit ORBITAL ENERGIES
                             for line in whole_file_data:
                                 # check to see if you hit the 'last
                                 if line.strip() == "ORBITAL ENERGIES":
@@ -90,32 +94,24 @@ class OrbitalEnergyParser:
 
                             # once I have those read in reverse the list again
                             eof_to_orbital_energy_list.reverse()
-
+                            eof_to_orbital_energy_list.pop(0)
                             # initiate a blank line counter
                             blank_lines_encountered = 0
-
-                            # initialize iterator
-                            i = 0
-
-                            # initialize a list to write to output
-                            list_to_write_to_output = []
-
-                            while blank_lines_encountered != 2:
-                                line = eof_to_orbital_energy_list[i]
-                                if line.strip() == '\n':
-                                    blank_lines_encountered += 1
-                                    i += 1
-                                elif line.startswith('-'):
-                                    i += 1
+                            # append lines forwards until you encounter two blank lines.
+                            for line in eof_to_orbital_energy_list:
+                                if line.strip():
+                                    list_to_write_to_output.append(line.strip())
                                 else:
-                                    list_to_write_to_output.append(line)
-                                    i += 1
+                                    blank_lines_encountered += 1
+                                    if blank_lines_encountered == 2:
+                                        break
                         timestamp = datetime.datetime.now().strftime("%Y%m%d%H")
                         int_text_file_name = outputfile + "_orbital_energies" + timestamp + ".csv"
                         with open(int_text_file_name, 'w') as file:
-                            csv_writer = csv.writer(file)
-                            for line in eof_to_orbital_energy_list:
-                                line.replace('\n', '')
+                            # unix dialect should be used because this will be deployed on those systems
+                            csv_writer = csv.writer(file, dialect='unix')
+                            for line in list_to_write_to_output:
+                                line = line.replace('\n', '')
                                 if line.strip() == "SPIN UP ORBITALS":
                                     csv_writer.writerow(["Spin Up Orbitals"])
                                 elif line.strip() == "SPIN DOWN ORBITALS":
