@@ -43,6 +43,8 @@ class ExcitationEnergyParser:
                         output_csv_path = os.path.join(self.directory_of_outputs, f"{outputfile.split('.')[0]}_excitations.csv")
                         with open(output_csv_path, 'w', newline='') as csvfile:
                             csv_writer = csv.writer(csvfile, delimiter=',')
+                            # write the header line to differentiate data upon manual compilation
+                            csv_writer.writerow([outputfile.split('.')[0]])
                             csv_writer.writerow(['State', 'Energy (au)', 'Energy (eV)', 'Energy (cm**-1)', 'Transition', 'Transition Coefficient', 'Transition Weight'])
 
                             state_num, energy_au, energy_ev, energy_cm = None, None, None, None

@@ -44,6 +44,8 @@ class OrbitalEnergyParser:
 
     def iterate_over_outputs(self):
         """
+        Note that you should always check that the final set of orbitals is of a decent quality before using this.
+        Your calculation may terminate normally but return bogus orbital energies.
         Parses an output file for the last instance of lines matching:
         ----------------
         ORBITAL ENERGIES
@@ -106,10 +108,11 @@ class OrbitalEnergyParser:
                                     if blank_lines_encountered == 2:
                                         break
                         timestamp = datetime.datetime.now().strftime("%Y%m%d%H")
-                        int_text_file_name = outputfile + "_orbital_energies" + timestamp + ".csv"
-                        with open(int_text_file_name, 'w') as file:
+                        text_file_name = outputfile.strip(".out") + "_orbital_energies" + timestamp + ".csv"
+                        with open(text_file_name, 'w') as file:
                             # unix dialect should be used because this will be deployed on those systems
                             csv_writer = csv.writer(file, dialect='unix')
+                            csv_writer.writerow([outputfile.strip(".out")])
                             for line in list_to_write_to_output:
                                 line = line.replace('\n', '')
                                 if line.strip() == "SPIN UP ORBITALS":
