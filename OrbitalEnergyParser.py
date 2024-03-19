@@ -94,11 +94,10 @@ class OrbitalEnergyParser:
                                     break
                                 eof_to_orbital_energy_list.append(line)
 
-                            # once I have those read in reverse the list again
-                            eof_to_orbital_energy_list.reverse()
-                            eof_to_orbital_energy_list.pop(0)
-                            # initiate a blank line counter
-                            blank_lines_encountered = 0
+                            eof_to_orbital_energy_list.reverse()    # once I have those read in reverse the list again
+                            eof_to_orbital_energy_list.pop(0)       # pop off the first element which should be a blank line.
+                            blank_lines_encountered = 0             # initiate a blank line counter
+
                             # append lines forwards until you encounter two blank lines.
                             for line in eof_to_orbital_energy_list:
                                 if line.strip():
