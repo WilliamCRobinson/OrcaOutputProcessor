@@ -84,7 +84,7 @@ class ExcitationEnergyParser:
                                     print(f"Exception: {e}")
                                     continue
 
-                        print(f'Data written to {output_csv_path}')
+                        #print(f'Data written to {output_csv_path}')
 
                     except Exception as e:
                         print(f"Unknown error: {e}")

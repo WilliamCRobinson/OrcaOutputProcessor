@@ -1,8 +1,8 @@
-import HyperFineMagneticParser
-import ExcitationEnergyParser
-from SinglePointEnergyParser import SinglePointEnergyParser
-from GTensorParser import GTensorParser
-import OrbitalEnergyParser
+from orca_parser.HyperFineMagneticParser import HyperFineMagneticParser
+from orca_parser.ExcitationEnergyParser import ExcitationEnergyParser
+from orca_parser.SinglePointEnergyParser import SinglePointEnergyParser
+from orca_parser.GTensorParser import GTensorParser
+from orca_parser.OrbitalEnergyParser import OrbitalEnergyParser
 import os
 """
 The purpose of this package is to provide a user-friendly interface for parsing Orca-formatted output files.
@@ -36,7 +36,7 @@ def main():
         cwd_list = os.listdir(cwd)
         for output in cwd_list:
             if output.endswith('.out'):
-                hfmp = HyperFineMagneticParser.HyperFineMagneticParser(output)
+                hfmp = HyperFineMagneticParser(output)
                 hfmp.find_write_hfc_values()
     elif process_requested.lower().strip() == "g-tensor":
         # implement g-tensor
@@ -54,7 +54,7 @@ def main():
         cwd_list = os.listdir(cwd)
         for output in cwd_list:
             if output.endswith('.out'):
-                hfmp = HyperFineMagneticParser.HyperFineMagneticParser(output)
+                hfmp = HyperFineMagneticParser(output)
                 hfmp.find_write_hfc_values()
         # g-tensor
         os.chdir(output_path)
@@ -66,19 +66,19 @@ def main():
         spep.iterate_over_outputs_parse_output_spe()
         # orbital energy
         os.chdir(output_path)
-        oep = OrbitalEnergyParser.OrbitalEnergyParser(output_path)
+        oep = OrbitalEnergyParser(output_path)
         oep.iterate_over_outputs()
         # excitations from TDDFT
         os.chdir(output_path)
-        eep = ExcitationEnergyParser.ExcitationEnergyParser(output_path)
+        eep = ExcitationEnergyParser(output_path)
         eep.iterate_over_outputs()
     elif process_requested.lower().strip() == "orbitalenergies":
         os.chdir(output_path)
-        oep = OrbitalEnergyParser.OrbitalEnergyParser(output_path)
+        oep = OrbitalEnergyParser(output_path)
         oep.iterate_over_outputs()
     elif process_requested.lower().strip() == "excitations":
         os.chdir(output_path)
-        eep = ExcitationEnergyParser.ExcitationEnergyParser(output_path)
+        eep = ExcitationEnergyParser(output_path)
         eep.iterate_over_outputs()
 
 
