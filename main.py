@@ -29,6 +29,7 @@ def main():
     """
     process_requested = input("hyperfine, g-tensor, orbital energies, singlepoint, or excitations:")
     output_path = input("please provide the absolute path of your output file directory:")
+
     if process_requested.lower() == "hyperfine":
         # keeping this simple for now, just the stuff that pulls the hyperfine coupling constants out.
         os.chdir(output_path)
@@ -72,7 +73,7 @@ def main():
         os.chdir(output_path)
         eep = ExcitationEnergyParser(output_path)
         eep.iterate_over_outputs()
-    elif process_requested.lower().strip() == "orbitalenergies":
+    elif process_requested.lower().strip() == "orbitalenergies" or "orbital" or "orbitalenergies":
         os.chdir(output_path)
         oep = OrbitalEnergyParser(output_path)
         oep.iterate_over_outputs()
