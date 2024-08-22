@@ -3,6 +3,7 @@ from orca_parser.ExcitationEnergyParser import ExcitationEnergyParser
 from orca_parser.SinglePointEnergyParser import SinglePointEnergyParser
 from orca_parser.GTensorParser import GTensorParser
 from orca_parser.OrbitalEnergyParser import OrbitalEnergyParser
+from orca_parser.SCFEnergyParser import SCFEnergyParser
 import os
 """
 The purpose of this package is to provide a user-friendly interface for parsing Orca-formatted output files.
@@ -27,7 +28,7 @@ def main():
     Returns:
         None
     """
-    process_requested = input("hyperfine, g-tensor, orbital energies, singlepoint, or excitations:")
+    process_requested = input("hyperfine, g-tensor, orbital energies, singlepoint, scf or excitations:")
     output_path = input("please provide the absolute path of your output file directory:")
 
     if process_requested.lower() == "hyperfine":
@@ -73,7 +74,7 @@ def main():
         os.chdir(output_path)
         eep = ExcitationEnergyParser(output_path)
         eep.iterate_over_outputs()
-    elif process_requested.lower().strip() == "orbitalenergies" or "orbital" or "orbitalenergies":
+    elif process_requested.lower().strip() == "orbitalenergies":
         os.chdir(output_path)
         oep = OrbitalEnergyParser(output_path)
         oep.iterate_over_outputs()
@@ -81,6 +82,11 @@ def main():
         os.chdir(output_path)
         eep = ExcitationEnergyParser(output_path)
         eep.iterate_over_outputs()
+    elif process_requested.lower().strip() == "scf":
+        os.chdir(output_path)
+        scfep = SCFEnergyParser(output_path)
+        results = scfep.file_processor_success()
+        scfep.csv_writer("SCF_energy_", results)
 
 
 if __name__ == "__main__":
