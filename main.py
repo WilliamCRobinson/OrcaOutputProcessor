@@ -74,6 +74,11 @@ def main():
         os.chdir(output_path)
         eep = ExcitationEnergyParser(output_path)
         eep.iterate_over_outputs()
+        #SCF energies
+        os.chdir(output_path)
+        scfep = SCFEnergyParser(output_path)
+        results = scfep.file_processor_success()
+        scfep.csv_writer("SCF_energy_", results)
     elif process_requested.lower().strip() == "orbitalenergies":
         os.chdir(output_path)
         oep = OrbitalEnergyParser(output_path)
